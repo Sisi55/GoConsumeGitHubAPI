@@ -11,15 +11,20 @@ type CreateRepoRequest struct {
 }
 
 type CreateRepoResponse struct {
-	Id       int64     `json:"id"`
-	Name     string    `json:"name"`
-	FullName string    `json:"full_name"`
-	Owner    RepoOwner `json:"owner"`
+	Id       int64  `json:"id"`
+	Name     string `json:"name"`
+	FullName string `json:"full_name"`
+	Owner    struct {
+		Id      int64  `json:"id"`
+		Login   string `json:"login"`
+		Url     string `json:"url"`
+		HtmlUrl string `json:"html_url"`
+	} `json:"owner"`
 }
 
-type RepoOwner struct {
-	Id      int64  `json:"id"`
-	Login   string `json:"login"`
-	Url     string `json:"url"`
-	HtmlUrl string `json:"html_url"`
-}
+//type RepoOwner struct {
+//	Id      int64  `json:"id"`
+//	Login   string `json:"login"`
+//	Url     string `json:"url"`
+//	HtmlUrl string `json:"html_url"`
+//}

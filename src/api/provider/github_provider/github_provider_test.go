@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/Sisi55/GoConsumeGitHubAPI/src/api/clients/restclient"
+	"github.com/Sisi55/GoConsumeGitHubAPI/src/api/config"
 	"github.com/Sisi55/GoConsumeGitHubAPI/src/api/domain/github"
 	"github.com/stretchr/testify/assert"
 	"io/ioutil"
@@ -47,7 +48,7 @@ func TestCreateRepoErrorRestClient(t *testing.T) {
 		Err:        errors.New("invalid restclient response"),
 	})
 
-	response, err := CreateRepo("", github.CreateRepoRequest{})
+	response, err := CreateRepo(config.GetGithubAccessToken(), github.CreateRepoRequest{})
 	assert.Nil(t, response)
 	assert.NotNil(t, err)
 	assert.EqualValues(t, "invalid restclient response", err.Message)
@@ -73,7 +74,7 @@ func TestCreateRepoInvalidResponseBody(t *testing.T) {
 		//Err:        errors.New("invalid restclient response"),
 	})
 
-	response, err := CreateRepo("", github.CreateRepoRequest{})
+	response, err := CreateRepo(config.GetGithubAccessToken(), github.CreateRepoRequest{})
 	assert.Nil(t, response)
 	assert.NotNil(t, err)
 	assert.EqualValues(t, "invalid response body", err.Message)
@@ -92,7 +93,7 @@ func TestCreateRepoInvalidErrorInterface(t *testing.T) {
 		//Err:        errors.New("invalid restclient response"),
 	})
 
-	response, err := CreateRepo("", github.CreateRepoRequest{})
+	response, err := CreateRepo(config.GetGithubAccessToken(), github.CreateRepoRequest{})
 	assert.Nil(t, response)
 	assert.NotNil(t, err)
 	assert.EqualValues(t, "invalid json response body", err.Message)
@@ -111,7 +112,7 @@ func TestCreateRepoUnauthorized(t *testing.T) {
 		//Err:        errors.New("invalid restclient response"),
 	})
 
-	response, err := CreateRepo("", github.CreateRepoRequest{})
+	response, err := CreateRepo(config.GetGithubAccessToken(), github.CreateRepoRequest{})
 	assert.Nil(t, response)
 	assert.NotNil(t, err)
 	assert.EqualValues(t, "Bad credentials", err.Message)
@@ -130,7 +131,7 @@ func TestCreateRepoSuccessInvalidResponse(t *testing.T) {
 		//Err:        errors.New("invalid restclient response"),
 	})
 
-	response, err := CreateRepo("", github.CreateRepoRequest{})
+	response, err := CreateRepo(config.GetGithubAccessToken(), github.CreateRepoRequest{})
 	assert.Nil(t, response)
 	assert.NotNil(t, err)
 	assert.EqualValues(t, "Bad credentials", err.Message)
@@ -149,7 +150,7 @@ func TestCreateRepoNoError(t *testing.T) {
 		//Err:        errors.New("invalid restclient response"),
 	})
 
-	response, err := CreateRepo("", github.CreateRepoRequest{})
+	response, err := CreateRepo(config.GetGithubAccessToken(), github.CreateRepoRequest{})
 	assert.NotNil(t, response)
 	assert.Nil(t, err)
 	assert.EqualValues(t, 123, response.Id)
